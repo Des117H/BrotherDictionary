@@ -7,7 +7,8 @@
   ID: 3891542
   Created  date: 04/09/2022
   Last modified:
-  Acknowledgement: Acknowledge the resources that you use here.
+  Acknowledgement:
+ Canvas
 */
 
 import Foundation
@@ -37,6 +38,9 @@ func ConvertJSONtoWord(word: WordJSON)-> Word {
 	var wordForms: [String] = []
 	var pronunciation = ""
 	var audioUrl = ""
+	
+	
+	writeToFile()
 	
 	for def in word[0].meanings {
 		defTemp = def.partOfSpeech
@@ -70,6 +74,11 @@ func decoceJsonFileToStruct(wordSearch: String) -> WordJSON {
 			}
 		}
 	}
-
-	fatalError("Failed to encode JSON")
+	
+	return [WordElement(word: "",
+						phonetics: [Phonetic(audio: "", text: "")],
+						meanings: [Meaning(partOfSpeech: "",
+										   definitions: [Definition(definition: "")])
+						])
+	]
 }

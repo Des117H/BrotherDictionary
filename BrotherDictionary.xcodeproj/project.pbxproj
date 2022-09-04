@@ -14,6 +14,8 @@
 		AC15E5E128C487CF008D1858 /* WordJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC15E5E028C487CF008D1858 /* WordJSON.swift */; };
 		AC15E5E328C48805008D1858 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC15E5E228C48805008D1858 /* Word.swift */; };
 		AC15E5E528C48AF6008D1858 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC15E5E428C48AF6008D1858 /* Player.swift */; };
+		AC15E5E728C4AC1F008D1858 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC15E5E628C4AC1F008D1858 /* ScreenSize.swift */; };
+		AC15E5EA28C4BA90008D1858 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = AC15E5E928C4BA8F008D1858 /* data.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		AC15E5E028C487CF008D1858 /* WordJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordJSON.swift; sourceTree = "<group>"; };
 		AC15E5E228C48805008D1858 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		AC15E5E428C48AF6008D1858 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		AC15E5E628C4AC1F008D1858 /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		AC15E5E928C4BA8F008D1858 /* data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,9 +63,11 @@
 			children = (
 				AC15E5D128C485CF008D1858 /* BrotherDictionaryApp.swift */,
 				AC15E5DF28C4878C008D1858 /* Word */,
+				AC15E5E828C4AC26008D1858 /* Utilities */,
 				AC15E5D328C485CF008D1858 /* ContentView.swift */,
 				AC15E5D528C485D4008D1858 /* Assets.xcassets */,
 				AC15E5D728C485D4008D1858 /* Preview Content */,
+				AC15E5E928C4BA8F008D1858 /* data.txt */,
 			);
 			path = BrotherDictionary;
 			sourceTree = "<group>";
@@ -79,9 +85,17 @@
 			children = (
 				AC15E5E028C487CF008D1858 /* WordJSON.swift */,
 				AC15E5E228C48805008D1858 /* Word.swift */,
-				AC15E5E428C48AF6008D1858 /* Player.swift */,
 			);
 			path = Word;
+			sourceTree = "<group>";
+		};
+		AC15E5E828C4AC26008D1858 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AC15E5E428C48AF6008D1858 /* Player.swift */,
+				AC15E5E628C4AC1F008D1858 /* ScreenSize.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC15E5D928C485D4008D1858 /* Preview Assets.xcassets in Resources */,
+				AC15E5EA28C4BA90008D1858 /* data.txt in Resources */,
 				AC15E5D628C485D4008D1858 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC15E5E728C4AC1F008D1858 /* ScreenSize.swift in Sources */,
 				AC15E5E128C487CF008D1858 /* WordJSON.swift in Sources */,
 				AC15E5E328C48805008D1858 /* Word.swift in Sources */,
 				AC15E5D428C485CF008D1858 /* ContentView.swift in Sources */,

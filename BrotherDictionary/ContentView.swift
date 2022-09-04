@@ -14,18 +14,29 @@ import SwiftUI
 
 
 struct ContentView: View {
-	let result = ConvertJSONtoWord(word: decoceJsonFileToStruct(wordSearch: "get"))
+	let result = ConvertJSONtoWord(word: decoceJsonFileToStruct(wordSearch: "ssss"))
 	
 	var body: some View {
-		List {
-			ForEach (result.wordForms, id: \.self) { form in
-				Section (header: Text(form)) {
-					ForEach (result.definitions[form]!, id: \.self) { def in
-						Text(def)
+		VStack {
+			Text("1")
+			VStack {
+				Text(result.word)
+					.font(.headline)
+				Text(result.pronunciation)
+					.font(.subheadline)
+			}
+			.frame(width: UIScreen.screenWidth, height: 100, alignment: .center)
+			
+			List {
+				ForEach (result.wordForms, id: \.self) { form in
+					Section (header: Text(form)) {
+						ForEach (result.definitions[form]!, id: \.self) { def in
+							Text(def)
+						}
 					}
 				}
 			}
+			.listStyle(GroupedListStyle())
 		}
-		.listStyle(GroupedListStyle())
 	}
 }
