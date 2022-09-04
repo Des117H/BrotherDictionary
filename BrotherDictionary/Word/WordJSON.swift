@@ -1,11 +1,14 @@
-//
-//  Word.swift
-//  TestScrap
-//
-//  Created by Dinh Tu on 04/09/2022.
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 3
+  Author: Tu Gia Dinh
+  ID: 3891542
+  Created  date: 04/09/2022
+  Last modified:
+  Acknowledgement: Acknowledge the resources that you use here.
+*/
 //   let word = try? newJSONDecoder().decode(Word.self, from: jsonData)
 
 import Foundation
