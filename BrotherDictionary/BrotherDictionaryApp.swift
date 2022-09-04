@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct BrotherDictionaryApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           let viewModel = AuthModel()
+           ContentView()
+                .environmentObject(viewModel)
         }
     }
 }
