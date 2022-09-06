@@ -9,29 +9,51 @@ import SwiftUI
 
 struct SearchListView: View {
     @State private var searchText: String = "welcome"
-    
+    @StateObject var wordViewModel = WordViewModel()
+
+
     var body: some View {
         let result = ConvertJSONtoWord(word: decoceJsonFileToStruct(wordSearch: searchText))
+        
+
         NavigationView {
+//            VStack {
+//                VStack {
+//                    Text(result.word)
+//                        .font(.headline)
+//                    Text(result.pronunciation)
+//                        .font(.subheadline)
+//                }
+//                .frame(width: UIScreen.screenWidth, height: 100, alignment: .center)
+//                Button(action: {
+//                    wordViewModel.addColWord(colWord: result)
+//                }) {
+//                  Text("Plus")
+//                }
+//
+//                List {
+//                    ForEach (result.wordForms, id: \.self) { form in
+//                        Section (header: Text(form)) {
+//                            ForEach (result.definitions[form]!, id: \.self) { def in
+//                                Text(def)
+//                            }
+//                        }
+//                    }
+//                }
+//                .listStyle(GroupedListStyle())
+//            }
+        
             VStack {
-                VStack {
-                    Text(result.word)
-                        .font(.headline)
-                    Text(result.pronunciation)
-                        .font(.subheadline)
+                Text(wordViewModel.singleWord.word)
+                Spacer()
+                Button(action: {
+                    wordViewModel.deleteWord(wordChosen: "welcome")
+                }) {
+                    Text("Delete")
                 }
-                .frame(width: UIScreen.screenWidth, height: 100, alignment: .center)
-                
-                List {
-                    ForEach (result.wordForms, id: \.self) { form in
-                        Section (header: Text(form)) {
-                            ForEach (result.definitions[form]!, id: \.self) { def in
-                                Text(def)
-                            }
-                        }
-                    }
-                }
-                .listStyle(GroupedListStyle())
+            }
+            .onAppear(){
+                wordViewModel.getDetailOneWord(searchWord: "welcome")
             }
         }
         .searchable(text: $searchText)
