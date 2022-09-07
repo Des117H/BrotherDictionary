@@ -15,40 +15,35 @@ struct SignInView: View {
     @EnvironmentObject var viewModel: AuthModel
     
     var body: some View {
-        NavigationView{
-            VStack{
-                VStack{
-                    TextField("Email Address", text: $email)
-                        .padding()
-                        
-                    SecureField("Password", text: $password)
-                        .padding()
-                    
-                    Button(action: {
-                        guard !email.isEmpty , !password.isEmpty else {
-                            return
-                        }
-                        
-                        viewModel.SignIn(email: email, password: password)
-                        
-                    }, label: {
-                        Text("Sign in")
-                            .navigationTitle("Sign In")
-                            .foregroundColor(Color.black)
-                            .frame(width: 200, height: 50)
-                            .background(Color.blue)
-                    })
-                    
-                    NavigationLink("Create Account", destination: SignUpView())
-                }
-                .padding()
-                
-                Spacer()
-            }
-            
-
-            
-        }.navigationTitle("Sign In")
+		VStack{
+			VStack{
+				TextField("Email Address", text: $email)
+					.padding()
+					
+				SecureField("Password", text: $password)
+					.padding()
+				
+				Button(action: {
+					guard !email.isEmpty , !password.isEmpty else {
+						return
+					}
+					
+					viewModel.SignIn(email: email, password: password)
+					
+				}, label: {
+					Text("Sign in")
+						.navigationTitle("Sign In")
+						.foregroundColor(Color.black)
+						.frame(width: 200, height: 50)
+						.background(Color.blue)
+				})
+				
+				NavigationLink("Create Account", destination: SignUpView())
+			}
+			.padding()
+			
+			Spacer()
+		}
     }}
 
 struct SignInView_Previews: PreviewProvider {

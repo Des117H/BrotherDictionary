@@ -14,38 +14,33 @@ struct SignUpView: View {
     @EnvironmentObject var viewModel: AuthModel
     
     var body: some View {
-        NavigationView{
-            VStack{
-                VStack{
-                    TextField("Email Address", text: $email)
-                        .padding()
-                        
-                    SecureField("Password", text: $password)
-                        .padding()
-                    
-                    Button(action: {
-                        guard !email.isEmpty , !password.isEmpty else {
-                            return
-                        }
-                        
-                        viewModel.SignUp(email: email, password: password)
-                        
-                    }, label: {
-                        Text("Sign Up")
-                            .navigationTitle("Sign Up")
-                            .foregroundColor(Color.black)
-                            .frame(width: 200, height: 50)
-                            .background(Color.blue)
-                    })
-                }
-                .padding()
-                
-                Spacer()
-            }
-            
-
-            
-        }.navigationTitle("Sign In")
+		VStack{
+			VStack{
+				TextField("Email Address", text: $email)
+					.padding()
+					
+				SecureField("Password", text: $password)
+					.padding()
+				
+				Button(action: {
+					guard !email.isEmpty , !password.isEmpty else {
+						return
+					}
+					
+					viewModel.SignUp(email: email, password: password)
+					
+				}, label: {
+					Text("Sign Up")
+						.navigationTitle("Sign Up")
+						.foregroundColor(Color.black)
+						.frame(width: 200, height: 50)
+						.background(Color.blue)
+				})
+			}
+			.padding()
+			
+			Spacer()
+		}
     }}
 
 struct SignUpView_Previews: PreviewProvider {
