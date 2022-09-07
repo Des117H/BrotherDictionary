@@ -13,14 +13,14 @@ import CoreAudio
 class WordViewModel: ObservableObject {
     private let db = Firestore.firestore()
     @Published var listColWord = [Word]()
-    @Published var singleWord = Word.init(word: "", pronunciation: "", definiton: ["": [""]], audioUrl: "", wordForms: [""])
+    @Published var singleWord = Word.init()
     func addColWord(colWord: Word) {
         let docData: [String: Any] = [
             "word": colWord.word,
             "pronunciation": colWord.pronunciation,
             "definitions": colWord.definitions,
             "audioUrl": colWord.audioUrl,
-            "userEdit": colWord.userEdit,
+			"userEdit": colWord.userEdit,
             "wordForms": colWord.wordForms,
             "dateAdded": Timestamp(date: Date()),
         ]

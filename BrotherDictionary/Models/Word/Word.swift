@@ -22,6 +22,14 @@ struct Word: Codable, Identifiable {
 	var userEdit: String?
 	let wordForms: [String]
 	
+	init() {
+		self.word = ""
+		self.pronunciation = ""
+		self.definitions = ["":[""]]
+		self.audioUrl = ""
+		self.wordForms = [""]
+	}
+	
 	init(word: String, pronunciation: String, definiton: [String: [String]], audioUrl: String, wordForms: [String]) {
 		self.word = word
 		self.pronunciation = pronunciation
