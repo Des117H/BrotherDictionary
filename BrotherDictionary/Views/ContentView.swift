@@ -17,15 +17,7 @@ struct ContentView: View {
         NavigationView{
             if viewModel.signedIn {
                 VStack{
-                    SearchListView()
-                    Button(action: {
-                        viewModel.SignOut()
-                    }, label: {
-                        Text("Sign Out")
-                            .foregroundColor(Color.black)
-                            .frame(width: 200, height: 50)
-                            .background(Color.blue)
-                    })
+					MenuView(viewModel: _viewModel)
                 }
 
             } else {
