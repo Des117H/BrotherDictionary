@@ -19,7 +19,7 @@ struct Word: Codable, Identifiable {
 	let pronunciation: String
 	let definitions: [String: [String]]
 	let audioUrl: String
-	var userEdit: String?
+	var userEdit: String = ""
 	let wordForms: [String]
 	
 	init() {

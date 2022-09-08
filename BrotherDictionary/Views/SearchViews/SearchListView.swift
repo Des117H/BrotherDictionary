@@ -13,100 +13,90 @@ struct SearchListView: View {
 	@State var showEdit = false
 	@State var editedDef = ""
 	@State private var newDef = ""
+	@State var result = Word()
 
 
     var body: some View {
-		let result = ConvertJSONtoWord(
-			word:
-				decoceJsonFileToStruct(
-					wordSearch:
-						searchText
-						.replacingOccurrences(of: " ", with: "_")))
-        
-//        NavigationView {
-//            VStack {
-//                VStack {
-//                    Text(result.word)
-//                        .font(.headline)
-//                    Text(result.pronunciation)
-//                        .font(.subheadline)
-//                }
-//                .frame(width: UIScreen.screenWidth, height: 100, alignment: .center)
-//                Button(action: {
-//                    wordViewModel.addColWord(colWord: result)
-//                }) {
-//                  Text("Plus")
-//                }
-//
-//                List {
-//                    ForEach (result.wordForms, id: \.self) { form in
-//                        Section (header: Text(form)) {
-//                            ForEach (result.definitions[form]!, id: \.self) { def in
-//                                Text(def)
-//                            }
-//                        }
-//                    }
-//                }
-//                .listStyle(GroupedListStyle())
-//            }
-        
-			VStack {
+		VStack {
+			Divider()
+			HStack {
+				Image("SearchGlass")
+					.frame(width: 25, height: 25, alignment: .center)
 				TextField("Enter word", text: $searchText)
 				.textInputAutocapitalization(.never)
 				.padding()
-				
-				
-				Divider()
-				
-				List {
-					ForEach (result.wordForms, id: \.self) { form in
-						Section (header: Text(form)) {
-							ForEach (result.definitions[form]!, id: \.self) { def in
-								Text(def)
-							}
+				.onSubmit({
+					result = ConvertJSONtoWord(
+						word:
+							decoceJsonFileToStruct(
+								wordSearch:
+									searchText
+									.replacingOccurrences(of: " ", with: "%20")
+							)
+					)
+				})
+			}
+			
+			Divider()
+			if result.word != "" {
+				HStack {
+					Text("Pronunciation: \(result.pronunciation)")
+						.padding()
+						.foregroundColor(.red)
+					Spacer()
+					Divider()
+					Spacer()
+					
+					Button(action: {
+						if let url = URL(string: result.audioUrl) {
+							Player.share.play(url: url)
+						}
+					}, label: {
+						Image("Sound")
+							.frame(width: 25, height: 25, alignment: .center)
+					})
+				}
+				.frame(height: 30, alignment: .center)
+			}
+			
+			List {
+				ForEach (result.wordForms, id: \.self) { form in
+					Section (header: Text(form)) {
+						ForEach (result.definitions[form]!, id: \.self) { def in
+							Text(def)
 						}
 					}
 				}
-				.listStyle(GroupedListStyle())
 			}
-//            .textFieldAlert(isShowing: $showEdit, text: $newDef, isDark: )
-			.navigationBarItems(
-				leading:
-					Button("Edit") {
-						showEdit = true
-					}
-				,
-				trailing:
-					Button(action: {
-						wordViewModel.deleteWord(wordChosen: searchText)
-					}, label: {
-						Text("Delete")
-					})
-				)
-//            VStack {
-//                Text(wordViewModel.singleWord.word)
-//                Spacer()
-//                Button(action: {
-//                    wordViewModel.deleteWord(wordChosen: "welcome")
-//                }) {
-//                    Text("Delete")
-//                }
-//            }
-//            .onAppear(){
-//                wordViewModel.getDetailOneWord(searchWord: "welcome")
-//            }
-//        }
-//        .searchable(text: $searchText)
-//            .onChange(of: searchText) {
-//                value in
-//                async {
-//                    if !value.isEmpty {
-//                        await result
-//                    } else {
-//                        await result
-//                    }
-//                }
-//            }
+			.listStyle(GroupedListStyle())
+			Spacer()
+		}
+		.textFieldAlert(isShowing: $showEdit, text: $newDef)
+		.navigationBarItems(
+			trailing: HStack {
+				Button("Edit") {
+					showEdit = true
+				}
+				.frame(width: 30, height: 30, alignment: .center)
+				Divider()
+				
+				Button(action: {
+//						wordViewModel.deleteWord(wordChosen: searchText)
+				}, label: {
+					Text("Add")
+				})
+				.frame(width: 30, height: 30, alignment: .center)
+				Divider()
+				
+				Button(action: {
+					wordViewModel.deleteWord(wordChosen: searchText)
+				}, label: {
+					Text("Delete")
+				})
+				.frame(width: 50, height: 30, alignment: .center)
+			}
+		)
+		.navigationBarTitle(Text(""), displayMode: .inline)
     }
 }
 
