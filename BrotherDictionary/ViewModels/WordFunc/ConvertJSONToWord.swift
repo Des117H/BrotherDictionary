@@ -14,9 +14,6 @@ func ConvertJSONtoWord(word: WordJSON)-> Word {
     var pronunciation = ""
     var audioUrl = ""
     
-    
-//    writeToFile()
-    
     for def in word[0].meanings {
         defTemp = def.partOfSpeech
         wordForms.append(defTemp)
@@ -34,6 +31,10 @@ func ConvertJSONtoWord(word: WordJSON)-> Word {
             break
         }
     }
+	
+	if audioUrl == "" {
+		audioUrl = word[0].phonetics[0].audio
+	}
     
     return Word(word: word[0].word, pronunciation: pronunciation,
                 definiton: definitions, audioUrl: audioUrl, wordForms: wordForms)

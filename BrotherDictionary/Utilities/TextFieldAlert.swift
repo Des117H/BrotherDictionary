@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 extension View {
-
 	func textFieldAlert(isShowing: Binding<Bool>,
 						text: Binding<String>) -> some View {
 		TextFieldAlert(isShowing: isShowing,
@@ -32,7 +31,9 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
 					.disabled(isShowing)
 				VStack {
 					Text("New definition")
+						.foregroundColor(Color.black)
 					TextField("Enter your new definition", text: self.$result)
+						.foregroundColor(Color.black)
 					Divider()
 					HStack {
 						Button(action: {
@@ -41,6 +42,7 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
 							}
 						}) {
 							Text("Dismiss")
+								.foregroundColor(Color.black)
 						}
 					}
 				}

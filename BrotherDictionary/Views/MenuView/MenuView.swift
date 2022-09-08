@@ -11,21 +11,26 @@ struct MenuView: View {
 	@EnvironmentObject var viewModel: AuthModel
 	
     var body: some View {
-		NavigationLink(
-		 destination: SearchListView()
-		) {
-			Text("Search word")
-				.foregroundColor(.red)
+		VStack {
+			NavigationLink(
+			 destination: SearchListView()
+			) {
+				Text("Search word")
+					.foregroundColor(Color.red)
+					.frame(width: 200, height: 50)
+					.background(Color.blue)
+			}
+			.buttonStyle(PlainButtonStyle())
+			
+			Button(action: {
+				viewModel.SignOut()
+			}, label: {
+				Text("Sign Out")
+					.foregroundColor(Color.red)
+					.frame(width: 200, height: 50)
+					.background(Color.blue)
+			})
+			.buttonStyle(PlainButtonStyle())
 		}
-		.buttonStyle(PlainButtonStyle())
-		
-		Button(action: {
-			viewModel.SignOut()
-		}, label: {
-			Text("Sign Out")
-				.foregroundColor(Color.black)
-				.frame(width: 200, height: 50)
-				.background(Color.blue)
-		})
     }
 }

@@ -20,7 +20,7 @@ class WordViewModel: ObservableObject {
             "pronunciation": colWord.pronunciation,
             "definitions": colWord.definitions,
             "audioUrl": colWord.audioUrl,
-			"userEdit": colWord.userEdit,
+			"userEdit": colWord.userEdit ?? "",
             "wordForms": colWord.wordForms,
             "dateAdded": Timestamp(date: Date()),
         ]
