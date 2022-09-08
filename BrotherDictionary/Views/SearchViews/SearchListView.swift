@@ -69,7 +69,7 @@ struct SearchListView: View {
 				}
 				.listStyle(GroupedListStyle())
 			}
-			.textFieldAlert(isShowing: $showEdit, text: $newDef)
+//            .textFieldAlert(isShowing: $showEdit, text: $newDef, isDark: )
 			.navigationBarItems(
 				leading:
 					Button("Edit") {

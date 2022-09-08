@@ -6,18 +6,35 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct MenuView: View {
 	@EnvironmentObject var viewModel: AuthModel
-	
+    @StateObject var authViewModel = AuthModel()
+    
+//    @State private var isOn = false
     var body: some View {
 		NavigationLink(
 		 destination: SearchListView()
 		) {
+            ZStack{
+                // MARK: - DARKMODE BUTTON
+                  Button(action: {authViewModel.toggleLightMode()}) {
+                      Image(systemName: "lightbulb")
+                          Text(" Change Color Mode")
+                              .foregroundColor(authViewModel.singleUser.lightmode ? .white : .black)
+                      
+                          
+                  }
+
+            }
 			Text("Search word")
 				.foregroundColor(.red)
 		}
 		.buttonStyle(PlainButtonStyle())
+        .onAppear(){
+            authViewModel.getOne()
+        }
 		
 		Button(action: {
 			viewModel.SignOut()
@@ -26,6 +43,7 @@ struct MenuView: View {
 				.foregroundColor(Color.black)
 				.frame(width: 200, height: 50)
 				.background(Color.blue)
-		})
+		})        .preferredColorScheme(authViewModel.singleUser.lightmode ? .light : .dark)
+
     }
 }

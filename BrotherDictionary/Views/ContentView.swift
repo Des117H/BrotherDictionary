@@ -26,6 +26,7 @@ struct ContentView: View {
         }
         .onAppear{
             viewModel.signedIn = viewModel.isSignedIn
+            Thread.sleep(forTimeInterval: 2.0)
         }
     }
 }
