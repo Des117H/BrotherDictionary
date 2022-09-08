@@ -15,29 +15,28 @@ struct SignUpView: View {
     
     var body: some View {
 		VStack{
-			VStack{
-				TextField("Email Address", text: $email)
-					.padding()
-					
-				SecureField("Password", text: $password)
-					.padding()
+			TextField("Email Address", text: $email)
+				.padding()
 				
-				Button(action: {
-					guard !email.isEmpty , !password.isEmpty else {
-						return
-					}
-					
-					viewModel.SignUp(email: email, password: password)
-					
-				}, label: {
-					Text("Sign Up")
-						.navigationTitle("Sign Up")
-						.foregroundColor(Color.black)
-						.frame(width: 200, height: 50)
-						.background(Color.blue)
-				})
-			}
-			.padding()
+			SecureField("Password", text: $password)
+				.padding()
+			
+			Button(action: {
+				guard !email.isEmpty , !password.isEmpty else {
+					return
+				}
+				
+				viewModel.SignUp(email: email, password: password)
+				
+			}, label: {
+				Text("Sign Up")
+					.navigationTitle("Sign Up")
+					.foregroundColor(Color.black)
+					.frame(width: 200, height: 50)
+					.background(Color.blue)
+			})
+			
+			Spacer()
 		}
     }}
 

@@ -16,15 +16,12 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             if viewModel.signedIn {
-                VStack{
-					MenuView(viewModel: _viewModel)
-                }
-
+				MenuView(viewModel: _viewModel)
             } else {
                 SignInView()
             }
         }
-        .onAppear{
+        .onAppear {
             viewModel.signedIn = viewModel.isSignedIn
         }
     }

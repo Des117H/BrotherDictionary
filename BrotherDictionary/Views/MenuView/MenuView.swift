@@ -12,6 +12,7 @@ struct MenuView: View {
 	
     var body: some View {
 		VStack {
+			Text("")
 			NavigationLink(
 			 destination: SearchListView()
 			) {
@@ -31,6 +32,8 @@ struct MenuView: View {
 					.background(Color.blue)
 			})
 			.buttonStyle(PlainButtonStyle())
+			
+			Spacer()
 		}
     }
 }

@@ -23,18 +23,22 @@ func ConvertJSONtoWord(word: WordJSON)-> Word {
         
         definitions[defTemp] = meanTemp
     }
-    
-    for phonetic in word[0].phonetics {
-        if let pronun = phonetic.text {
-            pronunciation = pronun
-            audioUrl = phonetic.audio
-            break
-        }
-    }
 	
-	if audioUrl == "" {
-		audioUrl = word[0].phonetics[0].audio
+	if word[0].phonetics.count > 0 {
+		for phonetic in word[0].phonetics {
+			if let pronun = phonetic.text {
+				pronunciation = pronun
+				audioUrl = phonetic.audio
+				break
+			}
+		}
+		
+		if audioUrl == "" {
+			audioUrl = word[0].phonetics[0].audio
+		}
 	}
+    
+    
     
     return Word(word: word[0].word, pronunciation: pronunciation,
                 definiton: definitions, audioUrl: audioUrl, wordForms: wordForms)

@@ -17,9 +17,10 @@ struct SearchListView: View {
 	
     var body: some View {
 			VStack {
+				Divider()
 				HStack {
 					Image("SearchGlass")
-						.frame(width: 30, height: 30, alignment: .center)
+						.frame(width: 25, height: 25, alignment: .center)
 					TextField("Enter word", text: $searchText)
 					.textInputAutocapitalization(.never)
 					.padding()
@@ -29,7 +30,9 @@ struct SearchListView: View {
 								decoceJsonFileToStruct(
 									wordSearch:
 										searchText
-										.replacingOccurrences(of: " ", with: "%20")))
+										.replacingOccurrences(of: " ", with: "%20")
+								)
+						)
 					})
 				}
 				
@@ -49,7 +52,7 @@ struct SearchListView: View {
 							}
 						}, label: {
 							Image("Sound")
-								.frame(width: 30, height: 30, alignment: .center)
+								.frame(width: 25, height: 25, alignment: .center)
 						})
 					}
 					.frame(height: 30, alignment: .center)
@@ -65,23 +68,34 @@ struct SearchListView: View {
 					}
 				}
 				.listStyle(GroupedListStyle())
+				Spacer()
 			}
 			.textFieldAlert(isShowing: $showEdit, text: $newDef)
 			.navigationBarItems(
-				leading:
+				trailing: HStack {
 					Button("Edit") {
 						showEdit = true
 					}
 					.frame(width: 30, height: 30, alignment: .center)
-				,
-				trailing: 
+					Divider()
+					
+					Button(action: {
+//						wordViewModel.deleteWord(wordChosen: searchText)
+					}, label: {
+						Text("Add")
+					})
+					.frame(width: 30, height: 30, alignment: .center)
+					Divider()
+					
 					Button(action: {
 						wordViewModel.deleteWord(wordChosen: searchText)
 					}, label: {
 						Text("Delete")
 					})
-					.frame(width: 30, height: 30, alignment: .center)
-				)
+					.frame(width: 50, height: 30, alignment: .center)
+				}
+			)
+			.navigationBarTitle(Text(""), displayMode: .inline)
     }
 }
 
