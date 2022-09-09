@@ -14,88 +14,87 @@ struct SearchListView: View {
 	@State var editedDef = ""
 	@State private var newDef = ""
 	@State var result = Word()
-	
     var body: some View {
-			VStack {
-				Divider()
+		VStack {
+			Divider()
+			HStack {
+				Image("SearchGlass")
+					.frame(width: 25, height: 25, alignment: .center)
+				TextField("Enter word", text: $searchText)
+				.textInputAutocapitalization(.never)
+				.padding()
+				.onSubmit({
+					result = ConvertJSONtoWord(
+						word:
+							decoceJsonFileToStruct(
+								wordSearch:
+									searchText
+									.replacingOccurrences(of: " ", with: "%20")
+							)
+					)
+				})
+			}
+			
+			Divider()
+			if result.word != "" {
 				HStack {
-					Image("SearchGlass")
-						.frame(width: 25, height: 25, alignment: .center)
-					TextField("Enter word", text: $searchText)
-					.textInputAutocapitalization(.never)
-					.padding()
-					.onSubmit({
-						result = ConvertJSONtoWord(
-							word:
-								decoceJsonFileToStruct(
-									wordSearch:
-										searchText
-										.replacingOccurrences(of: " ", with: "%20")
-								)
-						)
+					Text("Pronunciation: \(result.pronunciation)")
+						.padding()
+						.foregroundColor(.red)
+					Spacer()
+					Divider()
+					Spacer()
+					
+					Button(action: {
+						if let url = URL(string: result.audioUrl) {
+							Player.share.play(url: url)
+						}
+					}, label: {
+						Image("Sound")
+							.frame(width: 25, height: 25, alignment: .center)
 					})
 				}
-				
-				Divider()
-				if result.word != "" {
-					HStack {
-						Text("Pronunciation: \(result.pronunciation)")
-							.padding()
-							.foregroundColor(.red)
-						Spacer()
-						Divider()
-						Spacer()
-						
-						Button(action: {
-							if let url = URL(string: result.audioUrl) {
-								Player.share.play(url: url)
-							}
-						}, label: {
-							Image("Sound")
-								.frame(width: 25, height: 25, alignment: .center)
-						})
-					}
-					.frame(height: 30, alignment: .center)
-				}
-				
-				List {
-					ForEach (result.wordForms, id: \.self) { form in
-						Section (header: Text(form)) {
-							ForEach (result.definitions[form]!, id: \.self) { def in
-								Text(def)
-							}
+				.frame(height: 30, alignment: .center)
+			}
+			
+			List {
+				ForEach (result.wordForms, id: \.self) { form in
+					Section (header: Text(form)) {
+						ForEach (result.definitions[form]!, id: \.self) { def in
+							Text(def)
 						}
 					}
 				}
-				.listStyle(GroupedListStyle())
-				Spacer()
 			}
-			.textFieldAlert(isShowing: $showEdit, text: $newDef)
-			.navigationBarItems(
-				trailing: HStack {
-					Button("Edit") {
-						showEdit = true
-					}
-					.frame(width: 30, height: 30, alignment: .center)
-					Divider()
-					
-					Button(action: {
-//						wordViewModel.deleteWord(wordChosen: searchText)
-					}, label: {
-						Text("Add")
-					})
-					.frame(width: 30, height: 30, alignment: .center)
-					Divider()
-					
-					Button(action: {
-						wordViewModel.deleteWord(wordChosen: searchText)
-					}, label: {
-						Text("Delete")
-					})
-					.frame(width: 50, height: 30, alignment: .center)
+			.listStyle(GroupedListStyle())
+			Spacer()
+		}
+		.textFieldAlert(isShowing: $showEdit, text: $newDef)
+		.navigationBarItems(
+			trailing: HStack {
+				Button("Edit") {
+					showEdit = true
 				}
-			)
-			.navigationBarTitle(Text(""), displayMode: .inline)
+				.frame(width: 30, height: 30, alignment: .center)
+				Divider()
+				
+				Button(action: {
+//						wordViewModel.deleteWord(wordChosen: searchText)
+				}, label: {
+					Text("Add")
+				})
+				.frame(width: 30, height: 30, alignment: .center)
+				Divider()
+				
+				Button(action: {
+					wordViewModel.deleteWord(wordChosen: searchText)
+				}, label: {
+					Text("Delete")
+				})
+				.frame(width: 50, height: 30, alignment: .center)
+			}
+		)
+		.navigationBarTitle(Text(""), displayMode: .inline)
     }
 }
 
