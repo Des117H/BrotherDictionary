@@ -15,7 +15,7 @@ import Foundation
 
 struct Word: Codable, Identifiable {
 	var id = UUID()
-	let word: String
+    let word: String
 	let pronunciation: String
 	let definitions: [String: [String]]
 	let audioUrl: String
@@ -28,14 +28,16 @@ struct Word: Codable, Identifiable {
 		self.definitions = ["":[""]]
 		self.audioUrl = ""
 		self.wordForms = [""]
+        self.userEdit = ""
 	}
 	
-	init(word: String, pronunciation: String, definiton: [String: [String]], audioUrl: String, wordForms: [String]) {
+    init(word: String, pronunciation: String, definiton: [String: [String]], audioUrl: String, wordForms: [String], userEdit: String) {
 		self.word = word
 		self.pronunciation = pronunciation
 		self.definitions = definiton
 		self.audioUrl = audioUrl
 		self.wordForms = wordForms
+        self.userEdit = userEdit
 	}
 }
 

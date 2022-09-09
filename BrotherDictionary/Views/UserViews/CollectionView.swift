@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct CollectionView: View {
+    @StateObject private var wordViewModel = WordViewModel()
+    @StateObject private var authViewModel = AuthModel()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("\(authViewModel.singleUser.email) collection")
+        List {
+            ForEach (wordViewModel.listColWord) { word in
+                NavigationLink {
+                    WordDetailView(result: word)
+                } label: {
+                    Section(header: Text(word.word)){
+                    }
+                }
+                Button(action: {
+                    wordViewModel.deleteWord(wordChosen: word.word)
+                }, label: {
+                    Text("Delete")
+                })
+                .frame(width: 50, height: 30, alignment: .center)
+
+            }
+        }
+        .onAppear(){
+            wordViewModel.getListColWord()
+            authViewModel.getOne()
+        }
     }
 }
 

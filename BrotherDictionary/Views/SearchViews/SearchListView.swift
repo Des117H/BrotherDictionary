@@ -66,33 +66,18 @@ struct SearchListView: View {
 					}
 				}
 			}
-			.listStyle(GroupedListStyle())
 			Spacer()
 		}
-		.textFieldAlert(isShowing: $showEdit, text: $newDef)
+//		.textFieldAlert(isShowing: $showEdit, text: $newDef)
 		.navigationBarItems(
 			trailing: HStack {
-				Button("Edit") {
-					showEdit = true
-				}
-				.frame(width: 30, height: 30, alignment: .center)
-				Divider()
-				
 				Button(action: {
-//						wordViewModel.deleteWord(wordChosen: searchText)
+                    wordViewModel.addColWord(colWord: result)
 				}, label: {
 					Text("Add")
 				})
 				.frame(width: 30, height: 30, alignment: .center)
-				Divider()
-				
-				Button(action: {
-					wordViewModel.deleteWord(wordChosen: searchText)
-				}, label: {
-					Text("Delete")
-				})
-				.frame(width: 50, height: 30, alignment: .center)
-			}
+            }
 		)
 		.navigationBarTitle(Text(""), displayMode: .inline)
     }

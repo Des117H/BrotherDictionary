@@ -14,36 +14,51 @@ struct MenuView: View {
     
 //    @State private var isOn = false
     var body: some View {
-		NavigationLink(
-		 destination: SearchListView()
-		) {
-            ZStack{
-                // MARK: - DARKMODE BUTTON
-                  Button(action: {authViewModel.toggleLightMode()}) {
-                      Image(systemName: "lightbulb")
-                          Text(" Change Color Mode")
-                              .foregroundColor(authViewModel.singleUser.lightmode ? .white : .black)
-                      
-                          
-                  }
-
+        VStack {
+            NavigationLink(
+             destination: SearchListView()
+            ) {
+                ZStack{
+                    // MARK: - DARKMODE BUTTON
+                      Button(action: {authViewModel.toggleLightMode()}) {
+                          Image(systemName: "lightbulb")
+                              Text(" Change Color Mode")
+                                  .foregroundColor(authViewModel.singleUser.lightmode ? .white : .black)
+                      }
+                }
+                Text("Search word")
+                    .foregroundColor(.red)
             }
-			Text("Search word")
-				.foregroundColor(.red)
-		}
-		.buttonStyle(PlainButtonStyle())
-        .onAppear(){
-            authViewModel.getOne()
+            .buttonStyle(PlainButtonStyle())
+            .onAppear(){
+                authViewModel.getOne()
+            }
+
+            Spacer()
+            
+            NavigationLink(
+             destination: CollectionView()
+            ) {
+                Text("User collection")
+                    .foregroundColor(.red)
+            }
+            .buttonStyle(PlainButtonStyle())
+
+            Spacer()
+            
+            Button(action: {
+                viewModel.SignOut()
+            }, label: {
+                Text("Sign Out")
+                    .foregroundColor(Color.black)
+                    .frame(width: 200, height: 50)
+                    .background(Color.blue)
+            })
+            .preferredColorScheme(authViewModel.singleUser.lightmode ? .light : .dark)
+
+            
         }
-		
-		Button(action: {
-			viewModel.SignOut()
-		}, label: {
-			Text("Sign Out")
-				.foregroundColor(Color.black)
-				.frame(width: 200, height: 50)
-				.background(Color.blue)
-		})        .preferredColorScheme(authViewModel.singleUser.lightmode ? .light : .dark)
+        
 
     }
 }

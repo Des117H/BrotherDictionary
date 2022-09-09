@@ -8,9 +8,78 @@
 import SwiftUI
 
 struct WordDetailView: View {
+    
+    @State private var newDef = ""
+    @State var showEdit = false
+    @StateObject var wordViewModel = WordViewModel()
+    @State var result = Word()
+    @State private var searchText = ""
+        
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+        VStack {
+            if wordViewModel.singleWord.userEdit == result.userEdit {
+                Text("Note: \(result.userEdit)")
+                Text("Note1: \(wordViewModel.singleWord.userEdit)")
+
+            } else {
+                Text("Note1: \(wordViewModel.singleWord.userEdit)")
+            }
+            
+            if result.word != "" {
+                HStack {
+                    Text("\(result.word) \(result.pronunciation)")
+                        .padding()
+                        .foregroundColor(.red)
+                    Spacer()
+                    Divider()
+//                    Spacer()
+                    
+                    Button(action: {
+                        if let url = URL(string: result.audioUrl) {
+                            Player.share.play(url: url)
+                        }
+                    }, label: {
+                        Image("Sound")
+                            .frame(width: 25, height: 25, alignment: .center)
+                    })
+                }
+                .frame(height: 30, alignment: .center)
+            }
+                        
+            Button(action: {
+                wordViewModel.getDetailOneWord(searchWord: result.word)
+            }, label: {
+                Text("get one")
+            })
+                        
+            List {
+                
+                ForEach (result.wordForms, id: \.self) { form in
+                    Section (header: Text(form)) {
+                        ForEach (result.definitions[form]!, id: \.self) { def in
+                            Text(def)
+                        }
+                    }
+                }
+            }
+            
+            Spacer()
+        }
+        .onAppear(){
+            wordViewModel.getDetailOneWord(searchWord: result.word)
+        }
+
+        .textFieldAlert(isShowing: $showEdit, text: $newDef, wordChosen: result.word)
+        .navigationBarItems(
+            trailing: HStack {
+                
+                Button("Edit") {
+                    showEdit = true
+                }
+                .frame(width: 30, height: 30, alignment: .center)
+            }
+        )
+        .navigationBarTitle(Text(""), displayMode: .inline)    }
 }
 
 struct WordDetailView_Previews: PreviewProvider {

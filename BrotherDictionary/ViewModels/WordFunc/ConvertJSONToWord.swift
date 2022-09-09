@@ -13,6 +13,7 @@ func ConvertJSONtoWord(word: WordJSON)-> Word {
     var wordForms: [String] = []
     var pronunciation = ""
     var audioUrl = ""
+    var userEdit = ""
     
     for def in word[0].meanings {
         defTemp = def.partOfSpeech
@@ -41,5 +42,5 @@ func ConvertJSONtoWord(word: WordJSON)-> Word {
     
     
     return Word(word: word[0].word, pronunciation: pronunciation,
-                definiton: definitions, audioUrl: audioUrl, wordForms: wordForms)
+                definiton: definitions, audioUrl: audioUrl, wordForms: wordForms, userEdit: userEdit)
 }

@@ -9,11 +9,17 @@ import Foundation
 import Combine
 import Firebase
 import CoreAudio
+import FirebaseAuth
 
 class WordViewModel: ObservableObject {
     private let db = Firestore.firestore()
+    let authEmail = (Auth.auth().currentUser?.email)!
+    let userCollection = "User"
+    let userCollectionWords = "words"
     @Published var listColWord = [Word]()
     @Published var singleWord = Word.init()
+    
+    
     func addColWord(colWord: Word) {
         let docData: [String: Any] = [
             "word": colWord.word,
@@ -25,7 +31,7 @@ class WordViewModel: ObservableObject {
             "dateAdded": Timestamp(date: Date()),
         ]
 
-        let docRef = db.collection("collections").document(colWord.word)
+        let docRef = db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(colWord.word)
 
         docRef.setData(docData) { error in
             if let error = error {
@@ -37,7 +43,7 @@ class WordViewModel: ObservableObject {
     }
     
     func getListColWord() {
-        let docRef = db.collection("collections")
+        let docRef = db.collection(userCollection).document(authEmail).collection(userCollectionWords)
         
         docRef.addSnapshotListener{
             (querySnapshot, error) in
@@ -52,11 +58,12 @@ class WordViewModel: ObservableObject {
                 
                 let word = data["word"] as? String ?? ""
                 let pronunciation = data["pronunciation"] as? String ?? ""
-                let definition = data["definition"] as? [String : [String]] ?? ["": [""]]
+                let definition = data["definitions"] as? [String : [String]] ?? ["": [""]]
                 let audioUrl = data["audioUrl"] as? String ?? ""
                 let wordForms = data["wordForms"] as? [String] ?? []
+                let userEdit = data["userEdit"] as? String ?? ""
                 
-                return Word(word: word, pronunciation: pronunciation, definiton: definition, audioUrl: audioUrl, wordForms: wordForms)
+                return Word(word: word, pronunciation: pronunciation, definiton: definition, audioUrl: audioUrl, wordForms: wordForms, userEdit: userEdit)
 
             }
             
@@ -64,14 +71,14 @@ class WordViewModel: ObservableObject {
     }
     
     func getDetailOneWord(searchWord: String) {
-        let documentId = db.collection("collections").document(searchWord).documentID
-        let docRef = db.collection("collections").document(searchWord)
+        let docRef = db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(searchWord)
         
         var word: String = ""
         var pronunciation: String = ""
         var definitions: [String : [String]] = ["": [""]]
         var audioUrl: String = ""
         var wordForms: [String] = [""]
+        var userEdit: String = ""
 
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -81,7 +88,8 @@ class WordViewModel: ObservableObject {
                 definitions = docData!["definitions"] as? [String: [String]] ?? ["":[""]]
                 audioUrl = docData!["audioUrl"] as? String ?? ""
                 wordForms = docData!["wordForms"] as? [String] ?? [""]
-                self.singleWord = Word(word: word, pronunciation: pronunciation, definiton: definitions, audioUrl: audioUrl, wordForms: wordForms)
+                userEdit = docData!["userEdit"] as? String ?? ""
+                self.singleWord = Word(word: word, pronunciation: pronunciation, definiton: definitions, audioUrl: audioUrl, wordForms: wordForms, userEdit: userEdit)
 
             } else {
                 print("Document does not exist")
@@ -94,23 +102,32 @@ class WordViewModel: ObservableObject {
             "userEdit": userNote,
             "dateAdded": Timestamp(date: Date()),
         ]
-        let documentID = db.collection("collections").document(wordChosen).documentID
-        if documentID == wordChosen {
+                    
+        let documentId = db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(wordChosen).documentID
+        if documentId == wordChosen {
+//            do {
+//                try db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(documentId).updateData(updateUserNote)
+//                    getDetailOneWord(searchWord: wordChosen)
+//                } catch {
+//                    print(error)
+//                  }
             do {
-                try db.collection("collections").document(documentID).updateData(updateUserNote)
-                  }
-                  catch {
-                    print(error)
-                  }
+                try db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(documentId).updateData(updateUserNote)
+            } catch {
+                print(error)
+            }
         }
     }
     
     func deleteWord(wordChosen: String) {
-        let documentID = db.collection("collections").document(wordChosen).documentID
-        if documentID == wordChosen {
+        let documentId = db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(wordChosen).documentID
+        if documentId == wordChosen {
             do {
-                try db.collection("collections").document(documentID).delete()
-                  }
+                try db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(documentId).delete()
+                self.listColWord.filter { word in
+                    return word.word != wordChosen
+                }
+            }
                   catch {
                     print(error)
                   }
