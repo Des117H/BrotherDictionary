@@ -24,7 +24,7 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
 
 	@Binding var isShowing: Bool
 	@Binding var result: String
-    @State var wordChosen: String
+    var wordChosen: String
 	let presenting: Presenting
     @StateObject private var wordViewModel = WordViewModel()
 
@@ -42,25 +42,23 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
 					HStack {
                         Button(action: {
                             wordViewModel.updateWord(userNote: result, wordChosen: wordChosen)
-
+//                            wordViewModel.getDetailOneWord(searchWord: wordChosen)
+                            withAnimation {
+                                self.isShowing.toggle()
+                            }
                             }, label: {
                                 Text("Save")
                                 .foregroundColor(Color.black)}
                         )
                         Spacer()
                         Button(action: {
-                            wordViewModel.getDetailOneWord(searchWord: wordChosen)
-
                             withAnimation {
-
                                 self.isShowing.toggle()
                             }
-                        }) {
-                            Text("Cancel")
-                                .foregroundColor(Color.black)
-                        }
-
-
+                            }, label: {
+                                Text("Cancel")
+                                .foregroundColor(Color.black)}
+                        )
 					}
 				}
 				.padding()

@@ -90,7 +90,7 @@ class WordViewModel: ObservableObject {
                 wordForms = docData!["wordForms"] as? [String] ?? [""]
                 userEdit = docData!["userEdit"] as? String ?? ""
                 self.singleWord = Word(word: word, pronunciation: pronunciation, definiton: definitions, audioUrl: audioUrl, wordForms: wordForms, userEdit: userEdit)
-
+                print(self.singleWord.userEdit)
             } else {
                 print("Document does not exist")
             }
@@ -113,6 +113,7 @@ class WordViewModel: ObservableObject {
 //                  }
             do {
                 try db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(documentId).updateData(updateUserNote)
+                self.getDetailOneWord(searchWord: wordChosen)
             } catch {
                 print(error)
             }
