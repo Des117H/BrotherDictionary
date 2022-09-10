@@ -17,6 +17,7 @@
 		AC15E5EA28C4BA90008D1858 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = AC15E5E928C4BA8F008D1858 /* data.txt */; };
 		ACB464F228C888720095D8BD /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB464F128C888720095D8BD /* TextFieldAlert.swift */; };
 		ACB464F528C8A4000095D8BD /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB464F428C8A4000095D8BD /* MenuView.swift */; };
+		BD30438028CC7A0A00BB61B6 /* ModalTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD30437F28CC7A0A00BB61B6 /* ModalTextInput.swift */; };
 		BDF40CAC28C7419A00724E7B /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF40CAB28C7419A00724E7B /* WordViewModel.swift */; };
 		FF8219C528C5ED1E00CFD3BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF8219C428C5ED1E00CFD3BF /* GoogleService-Info.plist */; };
 		FF8219FE28C5EFC100CFD3BF /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8219FD28C5EFC100CFD3BF /* Word.swift */; };
@@ -50,6 +51,7 @@
 		ACB464F128C888720095D8BD /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
 		ACB464F428C8A4000095D8BD /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B91435184BF816E07CCB21E3 /* Pods_BrotherDictionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BrotherDictionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD30437F28CC7A0A00BB61B6 /* ModalTextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTextInput.swift; sourceTree = "<group>"; };
 		BDF40CAB28C7419A00724E7B /* WordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModel.swift; sourceTree = "<group>"; };
 		FF8219C428C5ED1E00CFD3BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF8219FD28C5EFC100CFD3BF /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				AC15E5E628C4AC1F008D1858 /* ScreenSize.swift */,
 				ACB464F128C888720095D8BD /* TextFieldAlert.swift */,
+				BD30437F28CC7A0A00BB61B6 /* ModalTextInput.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				FF821A2128C5F08100CFD3BF /* SignUpView.swift in Sources */,
 				FF821A0C28C5F01800CFD3BF /* Player.swift in Sources */,
 				FF821A0728C5F01000CFD3BF /* AppDelegate.swift in Sources */,
+				BD30438028CC7A0A00BB61B6 /* ModalTextInput.swift in Sources */,
 				FF8219FE28C5EFC100CFD3BF /* Word.swift in Sources */,
 				56B959D628CA001900D8A8CF /* User.swift in Sources */,
 			);

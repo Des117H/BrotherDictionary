@@ -17,13 +17,12 @@ struct WordDetailView: View {
         
     var body: some View {
         VStack {
-            if wordViewModel.singleWord.userEdit == result.userEdit {
+            if wordViewModel.singleWord.userEdit == "" {
                 Text("Note: \(result.userEdit)")
-                Text("Note1: \(wordViewModel.singleWord.userEdit)")
-
             } else {
-                Text("Note1: \(wordViewModel.singleWord.userEdit)")
+                Text("Note: \(wordViewModel.singleWord.userEdit)")
             }
+            
             
             if result.word != "" {
                 HStack {
@@ -65,9 +64,12 @@ struct WordDetailView: View {
             
             Spacer()
         }
-        .onAppear(){
-            wordViewModel.getDetailOneWord(searchWord: result.word)
-        }
+        .onChange(of: showEdit) { _ in
+                    wordViewModel.getDetailOneWord(searchWord: result.word)
+                }
+//        .onAppear(){
+//            wordViewModel.getDetailOneWord(searchWord: result.word)
+//        }
 
         .textFieldAlert(isShowing: $showEdit, text: $newDef, wordChosen: result.word)
         .navigationBarItems(

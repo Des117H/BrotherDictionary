@@ -11,11 +11,13 @@ import SwiftUI
 extension View {
 	func textFieldAlert(isShowing: Binding<Bool>,
 						text: Binding<String>,
-                        wordChosen: String) -> some View {
+                        wordChosen: String
+                        ) -> some View {
 		TextFieldAlert(isShowing: isShowing,
 					   result: text,
                        wordChosen: wordChosen,
-					   presenting: self)
+					   presenting: self
+                        )
 	}
 
 }
@@ -27,7 +29,7 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
     var wordChosen: String
 	let presenting: Presenting
     @StateObject private var wordViewModel = WordViewModel()
-
+    
 	var body: some View {
 		GeometryReader { (deviceSize: GeometryProxy) in
 			ZStack {
@@ -42,7 +44,7 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
 					HStack {
                         Button(action: {
                             wordViewModel.updateWord(userNote: result, wordChosen: wordChosen)
-//                            wordViewModel.getDetailOneWord(searchWord: wordChosen)
+                            
                             withAnimation {
                                 self.isShowing.toggle()
                             }
@@ -60,6 +62,9 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                                 .foregroundColor(Color.black)}
                         )
 					}
+                    .onSubmit{
+                        wordViewModel.getDetailOneWord(searchWord: wordChosen)
+                    }
 				}
 				.padding()
 				.background(Color.white)
