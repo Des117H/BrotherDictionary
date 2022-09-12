@@ -22,10 +22,15 @@ struct WordDetailView: View {
             } else {
                 Text("Note: \(wordViewModel.singleWord.userEdit)")
             }
+            Button("Edit") {
+                showEdit = true
+            }
+            .frame(width: 30, height: 30, alignment: .center)
             
             
             if result.word != "" {
                 HStack {
+                    
                     Text("\(result.word) \(result.pronunciation)")
                         .padding()
                         .foregroundColor(.red)
@@ -45,11 +50,11 @@ struct WordDetailView: View {
                 .frame(height: 30, alignment: .center)
             }
                         
-            Button(action: {
-                wordViewModel.getDetailOneWord(searchWord: result.word)
-            }, label: {
-                Text("get one")
-            })
+//            Button(action: {
+//                wordViewModel.getDetailOneWord(searchWord: result.word)
+//            }, label: {
+//                Text("get one")
+//            })
                         
             List {
                 
@@ -75,10 +80,7 @@ struct WordDetailView: View {
         .navigationBarItems(
             trailing: HStack {
                 
-                Button("Edit") {
-                    showEdit = true
-                }
-                .frame(width: 30, height: 30, alignment: .center)
+                
             }
         )
         .navigationBarTitle(Text(""), displayMode: .inline)    }

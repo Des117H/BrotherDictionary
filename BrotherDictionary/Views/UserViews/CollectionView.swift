@@ -56,7 +56,7 @@ struct CollectionView: View {
     
     var body: some View {
         
-            NavigationView{
+            VStack{
                 List{
                     ForEach(wordViewModel.listColWord) {
                         word in
@@ -69,13 +69,13 @@ struct CollectionView: View {
                                 }
                             }
                             
-                            Button{
-                                wordViewModel.delete(wordChosen: word.word)
-                            } label: {
-                                Image(systemName: "minus.circle")
-                                    .foregroundColor(.red)
-
-                            }
+//                            Button{
+//                                wordViewModel.delete(wordChosen: word.word)
+//                            } label: {
+//                                Image(systemName: "minus.circle")
+//                                    .foregroundColor(.red)
+//
+//                            }
                         }
                     }
                 }
