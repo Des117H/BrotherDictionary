@@ -105,12 +105,6 @@ class WordViewModel: ObservableObject {
                     
         let documentId = db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(wordChosen).documentID
         if documentId == wordChosen {
-//            do {
-//                try db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(documentId).updateData(updateUserNote)
-//                    getDetailOneWord(searchWord: wordChosen)
-//                } catch {
-//                    print(error)
-//                  }
             do {
                 try db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(documentId).updateData(updateUserNote)
                 self.getDetailOneWord(searchWord: wordChosen)
@@ -120,19 +114,44 @@ class WordViewModel: ObservableObject {
         }
     }
     
-    func deleteWord(wordChosen: String) {
+//    func deleteWord(wordChosen: String) {
+//        let documentId = db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(wordChosen).documentID
+//        if documentId == wordChosen {
+//            do {
+//                try db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(documentId).delete()
+//                self.listColWord.filter { word in
+//                    return word.word != wordChosen
+//                }
+//            }
+//                  catch {
+//                    print(error)
+//                  }
+//        }
+//
+//    }
+    
+    func delete(wordChosen: String){
+    
         let documentId = db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(wordChosen).documentID
-        if documentId == wordChosen {
-            do {
-                try db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(documentId).delete()
-                self.listColWord.filter { word in
-                    return word.word != wordChosen
+            if documentId == wordChosen {
+                do {
+                    try db.collection(userCollection).document(authEmail).collection(userCollectionWords).document(documentId)
+                        .delete()
+                    self.listColWord.filter { word in
+                        return word.word != wordChosen
+                    }
                 }
-            }
-                  catch {
-                    print(error)
-                  }
-        }
-    }
+                      catch {
+                        print(error)
+                      }
+            
 
-}
+        }
+
+    }
+    
+    
+    }
+    
+    
+

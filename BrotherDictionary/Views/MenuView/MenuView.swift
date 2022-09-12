@@ -11,54 +11,23 @@ import Firebase
 struct MenuView: View {
 	@EnvironmentObject var viewModel: AuthModel
     @StateObject var authViewModel = AuthModel()
-    
-//    @State private var isOn = false
     var body: some View {
-        VStack {
-            NavigationLink(
-             destination: SearchListView()
-            ) {
-                ZStack{
-                    // MARK: - DARKMODE BUTTON
-                      Button(action: {authViewModel.toggleLightMode()}) {
-                          Image(systemName: "lightbulb")
-                              Text(" Change Color Mode")
-                                  .foregroundColor(authViewModel.singleUser.lightmode ? .white : .black)
-                      }
-                }
-                Text("Search word")
-                    .foregroundColor(.red)
+            TabView {
+                SearchListView()
+                    .tabItem{
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+                CollectionView()
+                    .tabItem{
+                        Label("Collection", systemImage: "book")
+                    }
+                UserSettingView()
+                    .tabItem{
+                        Label("Setting", systemImage: "gearshape")
+                    }
+                
+                
             }
-            .buttonStyle(PlainButtonStyle())
-            .onAppear(){
-                authViewModel.getOne()
-            }
-
-            Spacer()
-            
-            NavigationLink(
-             destination: CollectionView()
-            ) {
-                Text("User collection")
-                    .foregroundColor(.red)
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Spacer()
-            
-            Button(action: {
-                viewModel.SignOut()
-            }, label: {
-                Text("Sign Out")
-                    .foregroundColor(Color.black)
-                    .frame(width: 200, height: 50)
-                    .background(Color.blue)
-            })
-            .preferredColorScheme(authViewModel.singleUser.lightmode ? .light : .dark)
-
-            
         }
-        
 
-    }
 }

@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct UserSettingView: View {
+    @EnvironmentObject var viewModel: AuthModel
+    @StateObject var authViewModel = AuthModel()
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+              Button(action: {authViewModel.toggleLightMode()}) {
+                  Image(systemName: "lightbulb")
+                      Text(" Change Color Mode")
+                          .foregroundColor(!authViewModel.singleUser.lightmode ? .white : .black)
+              }
+                                        
+                            Button(action: {
+                                viewModel.SignOut()
+                            },label: {
+                                Text("Sign Out")
+                            })
+
+        }
+        .onAppear(){
+            authViewModel.getOne()
+        }
+                .preferredColorScheme(authViewModel.singleUser.lightmode ? .light : .dark)
+
     }
 }
 

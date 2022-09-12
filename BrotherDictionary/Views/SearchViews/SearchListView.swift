@@ -15,6 +15,7 @@ struct SearchListView: View {
 	@State private var newDef = ""
 	@State var result = Word()
     var body: some View {
+        
 		VStack {
 			Divider()
 			HStack {
@@ -33,6 +34,7 @@ struct SearchListView: View {
 							)
 					)
 				})
+                
 			}
 			
 			Divider()
@@ -43,7 +45,7 @@ struct SearchListView: View {
 						.foregroundColor(.red)
 					Spacer()
 					Divider()
-					Spacer()
+//					Spacer()
 					
 					Button(action: {
 						if let url = URL(string: result.audioUrl) {
@@ -53,22 +55,35 @@ struct SearchListView: View {
 						Image("Sound")
 							.frame(width: 25, height: 25, alignment: .center)
 					})
+                    
+                    
+                    if !wordViewModel.listColWord.contains(where: {$0.word == result.word}) {
+                        Button(action: {
+                            wordViewModel.addColWord(colWord: result)
+                        }, label: {
+                            Text("Add")
+                        })
+                    }
 				}
 				.frame(height: 30, alignment: .center)
 			}
+            if result.word != ""{
+                List {
+                    ForEach (result.wordForms, id: \.self) { form in
+                        Section (header: Text(form)) {
+                            ForEach (result.definitions[form]!, id: \.self) { def in
+                                Text(def)
+                            }
+                        }
+                    }
+                }
+            }
 			
-			List {
-				ForEach (result.wordForms, id: \.self) { form in
-					Section (header: Text(form)) {
-						ForEach (result.definitions[form]!, id: \.self) { def in
-							Text(def)
-						}
-					}
-				}
-			}
 			Spacer()
-		}
-//		.textFieldAlert(isShowing: $showEdit, text: $newDef)
+    }
+        .onChange(of: searchText){ _ in
+            wordViewModel.getListColWord()
+        }
 		.navigationBarItems(
 			trailing: HStack {
 				Button(action: {

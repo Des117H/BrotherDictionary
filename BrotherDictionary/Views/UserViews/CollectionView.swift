@@ -8,32 +8,88 @@
 import SwiftUI
 
 struct CollectionView: View {
+//    @StateObject private var wordViewModel = WordViewModel()
+//    @StateObject private var authViewModel = AuthModel()
+//
+//    var tempWord: Word
+//
+//    var body: some View {
+//            NavigationView{
+//                List(wordViewModel.listColWord){
+//                    word in
+//                    NavigationLink{
+//                        WordDetailView(result: word)
+//                    } label: {
+//                        HStack{
+//                            Text(word.word)
+//                        }
+//
+//                    }
+//                    Button{
+//                        wordViewModel.delete(wordChosen: word.word)
+//                    } label: {
+//                        Image(systemName: "minus.circle")
+//                            .foregroundColor(.red)
+//
+//                    }
+//
+//                }
+//
+//                    .navigationTitle("\(authViewModel.singleUser.email) collection")
+//                    .navigationBarItems(trailing: EditButton())
+//
+//            }
+//
+//
+//        .onAppear(){
+//            wordViewModel.getListColWord()
+//            authViewModel.getOne()
+//        }
+//    }
+
     @StateObject private var wordViewModel = WordViewModel()
     @StateObject private var authViewModel = AuthModel()
+    
+    func removeRows(at offsets: IndexSet, word: Word) {
+        wordViewModel.listColWord.remove(atOffsets: offsets)
+    }
+    
     var body: some View {
-        Text("\(authViewModel.singleUser.email) collection")
-        List {
-            ForEach (wordViewModel.listColWord) { word in
-                NavigationLink {
-                    WordDetailView(result: word)
-                } label: {
-                    Section(header: Text(word.word)){
+        
+            NavigationView{
+                List{
+                    ForEach(wordViewModel.listColWord) {
+                        word in
+                        HStack {
+                            NavigationLink{
+                                WordDetailView(result: word)
+                            } label: {
+                                HStack{
+                                    Text(word.word)
+                                }
+                            }
+                            
+                            Button{
+                                wordViewModel.delete(wordChosen: word.word)
+                            } label: {
+                                Image(systemName: "minus.circle")
+                                    .foregroundColor(.red)
+
+                            }
+                        }
                     }
                 }
-                Button(action: {
-                    wordViewModel.deleteWord(wordChosen: word.word)
-                }, label: {
-                    Text("Delete")
-                })
-                .frame(width: 50, height: 30, alignment: .center)
 
+                    .navigationTitle("\(authViewModel.singleUser.email) collection")
+                    .navigationBarItems(trailing: EditButton())
+                
             }
-        }
         .onAppear(){
             wordViewModel.getListColWord()
             authViewModel.getOne()
         }
     }
+
 }
 
 struct CollectionView_Previews: PreviewProvider {
