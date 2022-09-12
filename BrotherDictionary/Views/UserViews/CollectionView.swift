@@ -29,20 +29,20 @@ struct CollectionView: View {
                                     Text(word.word)
                                 }
                             }
-                            
-//                            Button{
-//                                wordViewModel.delete(wordChosen: word.word)
-//                            } label: {
-//                                Image(systemName: "minus.circle")
-//                                    .foregroundColor(.red)
-//
-//                            }
+                        }
+                        .swipeActions(edge: .trailing){
+                            Button{
+                                        wordViewModel.delete(wordChosen: word.word)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                    .tint(.red)
                         }
                     }
                 }
 
-//                    .navigationTitle("\(authViewModel.singleUser.email) collection")
-                    .navigationBarItems(trailing: EditButton())
+                .navigationTitle("\(authViewModel.singleUser.email) collection")
+                .listStyle(InsetListStyle())
                 
             }
         .onAppear(){

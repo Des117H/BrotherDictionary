@@ -11,7 +11,7 @@ import Firebase
 struct MenuView: View {
 	@EnvironmentObject var viewModel: AuthModel
     @StateObject var authViewModel = AuthModel()
-	
+    
     var body: some View {
 		VStack {
 			Spacer()
@@ -23,7 +23,7 @@ struct MenuView: View {
 			}
 			.buttonStyle(PlainButtonStyle())
 
-			Spacer()
+			
 			NavigationLink( destination: CollectionView() ) {
 				Text("User collection")
 					.foregroundColor(Color.black)
@@ -46,7 +46,7 @@ struct MenuView: View {
 				authViewModel.getOne()
 			}) {
 				Image(systemName: "lightbulb")
-				Text(authViewModel.singleUser.lightmode ? "Change to Dark Mode" : "Change to Light Mode")
+				Text(authViewModel.singleUser.lightmode ? "Dark Mode" : "Light Mode")
 					.foregroundColor(!authViewModel.singleUser.lightmode ? .white : .black)
 			}
 		, trailing:
@@ -56,5 +56,11 @@ struct MenuView: View {
 				Text("Sign Out")
 			})
 		)
-	}
+        
+        //burger menu
+        
+        
+    }
+    
 }
+
