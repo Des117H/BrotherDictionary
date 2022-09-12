@@ -43,10 +43,9 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
 					Divider()
 					HStack {
                         Button(action: {
-                            wordViewModel.updateWord(userNote: result, wordChosen: wordChosen)
-                            
-                            withAnimation {
-                                self.isShowing.toggle()
+							wordViewModel.updateWord(userNote: result, wordChosen: wordChosen)
+							withAnimation {
+								self.isShowing.toggle()
                             }
                             }, label: {
                                 Text("Save")
