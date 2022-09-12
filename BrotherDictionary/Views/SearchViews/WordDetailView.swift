@@ -21,17 +21,11 @@ struct WordDetailView: View {
             } else {
                 Text("Note: \(wordViewModel.singleWord.userEdit)")
             }
+			
             Button("Edit") {
                 showEdit = true
             }
             .frame(width: 30, height: 30, alignment: .center)
-//			NavigationLink(
-//				destination: TextFieldView(result: $newDef, wordChosen: result.word)
-//			) {
-//				Text("Edit")
-//					.foregroundColor(.red)
-//			}
-//			.buttonStyle(PlainButtonStyle())
             
             if result.word != "" {
                 HStack {

@@ -13,29 +13,24 @@ struct UserSettingView: View {
 	@State var dark: Bool = false
 
     var body: some View {
-        VStack{
-			Button(action: {
-				authViewModel.toggleLightMode()
-				authViewModel.getOne()
-				dark = !dark
-			}) {
-				Image(systemName: "lightbulb")
-				Text(" Change Color Mode")
-					.foregroundColor(!authViewModel.singleUser.lightmode ? .white : .black)
+		ZStack {
+			if authViewModel.singleUser.lightmode {
+				Image("white")
+			} else {
+				Image("black")
 			}
-			Button(action: {
-				viewModel.SignOut()
-			},label: {
-				Text("Sign Out")
+			VStack{
+				Text("1")
+			}
+			.onAppear() {
+				authViewModel.getOne()
+			}
+			.onChange(of: dark, perform: { _ in
+				authViewModel.getOne()
+				print(dark)
 			})
+			.preferredColorScheme(authViewModel.singleUser.lightmode ? .light : .dark)
 		}
-		.preferredColorScheme(authViewModel.singleUser.lightmode ? .light : .dark)
-        .onAppear(){
-            authViewModel.getOne()
-        }
-		.onChange(of: authViewModel.singleUser.lightmode, perform: { _ in
-			authViewModel.getOne()
-		})
 
     }
 }

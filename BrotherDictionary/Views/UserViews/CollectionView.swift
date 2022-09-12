@@ -8,45 +8,6 @@
 import SwiftUI
 
 struct CollectionView: View {
-//    @StateObject private var wordViewModel = WordViewModel()
-//    @StateObject private var authViewModel = AuthModel()
-//
-//    var tempWord: Word
-//
-//    var body: some View {
-//            NavigationView{
-//                List(wordViewModel.listColWord){
-//                    word in
-//                    NavigationLink{
-//                        WordDetailView(result: word)
-//                    } label: {
-//                        HStack{
-//                            Text(word.word)
-//                        }
-//
-//                    }
-//                    Button{
-//                        wordViewModel.delete(wordChosen: word.word)
-//                    } label: {
-//                        Image(systemName: "minus.circle")
-//                            .foregroundColor(.red)
-//
-//                    }
-//
-//                }
-//
-//                    .navigationTitle("\(authViewModel.singleUser.email) collection")
-//                    .navigationBarItems(trailing: EditButton())
-//
-//            }
-//
-//
-//        .onAppear(){
-//            wordViewModel.getListColWord()
-//            authViewModel.getOne()
-//        }
-//    }
-
     @StateObject private var wordViewModel = WordViewModel()
     @StateObject private var authViewModel = AuthModel()
     
@@ -80,7 +41,7 @@ struct CollectionView: View {
                     }
                 }
 
-                    .navigationTitle("\(authViewModel.singleUser.email) collection")
+//                    .navigationTitle("\(authViewModel.singleUser.email) collection")
                     .navigationBarItems(trailing: EditButton())
                 
             }

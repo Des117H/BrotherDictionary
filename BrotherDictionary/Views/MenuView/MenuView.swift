@@ -33,17 +33,28 @@ struct MenuView: View {
 			.buttonStyle(PlainButtonStyle())
 
 			Spacer()
-			NavigationLink( destination: UserSettingView() ) {
-				Text("Setting")
-					.foregroundColor(Color.black)
-					.frame(width: 200, height: 50)
-					.background(Color.blue)
-			}
-			.buttonStyle(PlainButtonStyle())
+			
+			
 		}
 		.preferredColorScheme(authViewModel.singleUser.lightmode ? .light : .dark)
 		.onAppear(){
 			authViewModel.getOne()
 		}
+		.navigationBarItems(leading:
+			Button(action: {
+				authViewModel.toggleLightMode()
+				authViewModel.getOne()
+			}) {
+				Image(systemName: "lightbulb")
+				Text(authViewModel.singleUser.lightmode ? "Change to Dark Mode" : "Change to Light Mode")
+					.foregroundColor(!authViewModel.singleUser.lightmode ? .white : .black)
+			}
+		, trailing:
+			Button(action: {
+				viewModel.SignOut()
+			},label: {
+				Text("Sign Out")
+			})
+		)
 	}
 }

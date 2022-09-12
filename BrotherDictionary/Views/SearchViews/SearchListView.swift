@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct SearchListView: View {
-    @State private var searchText = ""
-    @StateObject var wordViewModel = WordViewModel()
+	@State private var searchText = ""
+	@StateObject var wordViewModel = WordViewModel()
 	@State var showEdit = false
 	@State var editedDef = ""
 	@State private var newDef = ""
 	@State var result = Word()
-    var body: some View {
-        
+	
+	var body: some View {
 		VStack {
 			Divider()
 			HStack {
@@ -34,18 +34,17 @@ struct SearchListView: View {
 							)
 					)
 				})
-                
+				
 			}
 			
 			Divider()
+			
 			if result.word != "" {
 				HStack {
 					Text("Pronunciation: \(result.pronunciation)")
 						.padding()
 						.foregroundColor(.red)
-					Spacer()
 					Divider()
-//					Spacer()
 					
 					Button(action: {
 						if let url = URL(string: result.audioUrl) {
@@ -55,51 +54,44 @@ struct SearchListView: View {
 						Image("Sound")
 							.frame(width: 25, height: 25, alignment: .center)
 					})
-                    
-                    
-                    if !wordViewModel.listColWord.contains(where: {$0.word == result.word}) {
-                        Button(action: {
-                            wordViewModel.addColWord(colWord: result)
-                        }, label: {
-                            Text("Add")
-                        })
-                    }
+					
+					Divider()
+					Spacer()
+					
+					if !wordViewModel.listColWord.contains(where: {$0.word == result.word}) {
+						Button(action: {
+							wordViewModel.addColWord(colWord: result)
+						}, label: {
+							Text("Add")
+						})
+					} else {
+						Text("Added")
+					}
 				}
 				.frame(height: 30, alignment: .center)
+				
+				List {
+					ForEach (result.wordForms, id: \.self) { form in
+						Section (header: Text(form)) {
+							ForEach (result.definitions[form]!, id: \.self) { def in
+								Text(def)
+							}
+						}
+					}
+				}
 			}
-            if result.word != ""{
-                List {
-                    ForEach (result.wordForms, id: \.self) { form in
-                        Section (header: Text(form)) {
-                            ForEach (result.definitions[form]!, id: \.self) { def in
-                                Text(def)
-                            }
-                        }
-                    }
-                }
-            }
 			
 			Spacer()
-    }
-        .onChange(of: searchText){ _ in
-            wordViewModel.getListColWord()
-        }
-		.navigationBarItems(
-			trailing: HStack {
-				Button(action: {
-                    wordViewModel.addColWord(colWord: result)
-				}, label: {
-					Text("Add")
-				})
-				.frame(width: 30, height: 30, alignment: .center)
-            }
-		)
+		}
+		.onChange(of: searchText) { _ in
+			wordViewModel.getListColWord()
+		}
 		.navigationBarTitle(Text(""), displayMode: .inline)
-    }
+	}
 }
 
 struct SearchListView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchListView()
-    }
+	static var previews: some View {
+		SearchListView()
+	}
 }
