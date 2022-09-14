@@ -10,10 +10,11 @@ import SwiftUI
 struct WordDetailView: View {
     @State private var newDef = ""
     @State var showEdit = false
+	
     @StateObject var wordViewModel = WordViewModel()
     @State var result = Word()
-    @State private var searchText = ""
-	@EnvironmentObject var viewModel: AuthModel
+	
+	@State var isDark: Bool
         
     var body: some View {
         VStack {
@@ -60,19 +61,11 @@ struct WordDetailView: View {
             }
             Spacer()
         }
-		.onAppear(perform: {
-			viewModel.getOne()
-		})
         .onChange(of: showEdit) { _ in
 			wordViewModel.getDetailOneWord(searchWord: result.word)
 		}
-		.textFieldAlert(isShowing: $showEdit, text: $newDef, wordChosen: result.word, isDark: viewModel.singleUser.lightmode)
+		.textFieldAlert(isShowing: $showEdit, text: $newDef,
+						wordChosen: result.word, isDark: isDark)
         .navigationBarTitle(Text(""), displayMode: .inline)
 	}
-}
-
-struct WordDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        WordDetailView()
-    }
 }

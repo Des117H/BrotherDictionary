@@ -17,7 +17,7 @@ struct CollectionView: View {
 				ForEach (wordViewModel.listColWord) { word in
 					HStack {
 						NavigationLink {
-							WordDetailView(result: word)
+							WordDetailView(result: word, isDark: authViewModel.singleUser.lightmode)
 						} label: {
 							Text(word.word)
 						}

@@ -9,27 +9,21 @@ import Foundation
 import SwiftUI
 
 extension View {
-	func textFieldAlert(isShowing: Binding<Bool>,
-						text: Binding<String>,
-                        wordChosen: String,
-						isDark: Bool
-                        ) -> some View {
-		TextFieldAlert(isShowing: isShowing,
-					   result: text,
-                       wordChosen: wordChosen,
-					   presenting: self,
-					   isDark: isDark
-		)
+	func textFieldAlert(isShowing: Binding<Bool>, text: Binding<String>,
+                        wordChosen: String, isDark: Bool) -> some View {
+		TextFieldAlert(isShowing: isShowing, result: text,
+					   wordChosen: wordChosen, presenting: self, isDark: isDark)
 	}
-
 }
 
 struct TextFieldAlert<Presenting>: View where Presenting: View {
 	@Binding var isShowing: Bool
 	@Binding var result: String
+	
     var wordChosen: String
 	let presenting: Presenting
 	var isDark: Bool
+	
     @StateObject private var wordViewModel = WordViewModel()
     
 	var body: some View {
@@ -39,9 +33,8 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
 					.disabled(isShowing)
 				VStack {
 					Text("New definition")
-						.foregroundColor(isDark ? Color.white : Color.black)
 					TextField("Enter your new definition", text: self.$result)
-						.foregroundColor(isDark ? Color.white : Color.black)
+					
 					Divider()
 					HStack {
                         Button(action: {
@@ -51,7 +44,6 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                             }
                             }, label: {
                                 Text("Save")
-                                .foregroundColor(isDark ? Color.white : Color.black)
 							}
                         )
                         Spacer()
@@ -61,7 +53,6 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                             }
                             }, label: {
                                 Text("Cancel")
-                                .foregroundColor(isDark ? Color.white : Color.black)
 							}
                         )
 					}
@@ -70,7 +61,8 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                     }
 				}
 				.padding()
-				.background(!isDark ? Color.white : Color.black)
+				.background(isDark ? Color.white : Color.black)
+				.preferredColorScheme(isDark ? .light : .dark)
 				.frame(
 					width: deviceSize.size.width*0.7,
 					height: deviceSize.size.height*0.7
