@@ -38,9 +38,7 @@ func ConvertJSONtoWord(word: WordJSON)-> Word {
 			audioUrl = word[0].phonetics[0].audio
 		}
 	}
-    
-    
-    
-    return Word(word: word[0].word, pronunciation: pronunciation,
-                definiton: definitions, audioUrl: audioUrl, wordForms: wordForms, userEdit: userEdit)
+	
+    return Word(word: word[0].word, pronunciation: pronunciation, definiton: definitions,
+				audioUrl: audioUrl, wordForms: wordForms, userEdit: userEdit)
 }

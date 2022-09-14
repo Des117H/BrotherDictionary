@@ -11,23 +11,25 @@ import SwiftUI
 extension View {
 	func textFieldAlert(isShowing: Binding<Bool>,
 						text: Binding<String>,
-                        wordChosen: String
+                        wordChosen: String,
+						isDark: Bool
                         ) -> some View {
 		TextFieldAlert(isShowing: isShowing,
 					   result: text,
                        wordChosen: wordChosen,
-					   presenting: self
-                        )
+					   presenting: self,
+					   isDark: isDark
+		)
 	}
 
 }
 
 struct TextFieldAlert<Presenting>: View where Presenting: View {
-
 	@Binding var isShowing: Bool
 	@Binding var result: String
     var wordChosen: String
 	let presenting: Presenting
+	var isDark: Bool
     @StateObject private var wordViewModel = WordViewModel()
     
 	var body: some View {
@@ -37,9 +39,9 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
 					.disabled(isShowing)
 				VStack {
 					Text("New definition")
-						.foregroundColor(Color.black)
+						.foregroundColor(isDark ? Color.white : Color.black)
 					TextField("Enter your new definition", text: self.$result)
-						.foregroundColor(Color.black)
+						.foregroundColor(isDark ? Color.white : Color.black)
 					Divider()
 					HStack {
                         Button(action: {
@@ -49,7 +51,8 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                             }
                             }, label: {
                                 Text("Save")
-                                .foregroundColor(Color.black)}
+                                .foregroundColor(isDark ? Color.white : Color.black)
+							}
                         )
                         Spacer()
                         Button(action: {
@@ -58,7 +61,8 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                             }
                             }, label: {
                                 Text("Cancel")
-                                .foregroundColor(Color.black)}
+                                .foregroundColor(isDark ? Color.white : Color.black)
+							}
                         )
 					}
                     .onSubmit{
@@ -66,7 +70,7 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
                     }
 				}
 				.padding()
-				.background(Color.white)
+				.background(!isDark ? Color.white : Color.black)
 				.frame(
 					width: deviceSize.size.width*0.7,
 					height: deviceSize.size.height*0.7

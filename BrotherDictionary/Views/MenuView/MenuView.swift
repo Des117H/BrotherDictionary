@@ -23,7 +23,6 @@ struct MenuView: View {
 			}
 			.buttonStyle(PlainButtonStyle())
 
-			
 			NavigationLink( destination: CollectionView() ) {
 				Text("User collection")
 					.foregroundColor(Color.black)
@@ -33,8 +32,6 @@ struct MenuView: View {
 			.buttonStyle(PlainButtonStyle())
 
 			Spacer()
-			
-			
 		}
 		.preferredColorScheme(authViewModel.singleUser.lightmode ? .light : .dark)
 		.onAppear(){
@@ -56,11 +53,5 @@ struct MenuView: View {
 				Text("Sign Out")
 			})
 		)
-        
-        //burger menu
-        
-        
-    }
-    
+	}
 }
-

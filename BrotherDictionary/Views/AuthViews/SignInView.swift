@@ -9,7 +9,6 @@ import SwiftUI
 import FirebaseAuth
 
 struct SignInView: View {
-    
     @State var email = ""
     @State var password = ""
     @EnvironmentObject var viewModel: AuthModel
@@ -29,7 +28,6 @@ struct SignInView: View {
 					}
 					
 					viewModel.SignIn(email: email, password: password)
-					
 				}, label: {
 					Text("Sign in")
 						.navigationTitle("Sign In")
@@ -44,7 +42,11 @@ struct SignInView: View {
 			
 			Spacer()
 		}
-    }}
+		.alert("Wrong Email or Password!!!", isPresented: $viewModel.isTryIn) {
+			Button("OK", role: .cancel) { }
+		}
+    }
+}
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {

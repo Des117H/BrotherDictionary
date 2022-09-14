@@ -34,7 +34,6 @@ struct SearchListView: View {
 							)
 					)
 				})
-				
 			}
 			
 			Divider()

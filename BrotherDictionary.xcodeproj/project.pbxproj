@@ -26,7 +26,6 @@
 		FF821A0C28C5F01800CFD3BF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF821A0928C5F01800CFD3BF /* Player.swift */; };
 		FF821A0F28C5F02A00CFD3BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF821A0E28C5F02A00CFD3BF /* ContentView.swift */; };
 		FF821A1628C5F06A00CFD3BF /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF821A1428C5F06A00CFD3BF /* CollectionView.swift */; };
-		FF821A1728C5F06A00CFD3BF /* EditWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF821A1528C5F06A00CFD3BF /* EditWordView.swift */; };
 		FF821A1928C5F07200CFD3BF /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF821A1828C5F07200CFD3BF /* UserSettingView.swift */; };
 		FF821A1C28C5F07900CFD3BF /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF821A1A28C5F07900CFD3BF /* SearchListView.swift */; };
 		FF821A1D28C5F07900CFD3BF /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF821A1B28C5F07900CFD3BF /* WordDetailView.swift */; };
@@ -60,7 +59,6 @@
 		FF821A0928C5F01800CFD3BF /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		FF821A0E28C5F02A00CFD3BF /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FF821A1428C5F06A00CFD3BF /* CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
-		FF821A1528C5F06A00CFD3BF /* EditWordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWordView.swift; sourceTree = "<group>"; };
 		FF821A1828C5F07200CFD3BF /* UserSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
 		FF821A1A28C5F07900CFD3BF /* SearchListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		FF821A1B28C5F07900CFD3BF /* WordDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
@@ -163,6 +161,8 @@
 		AC15E5E828C4AC26008D1858 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FF821A2228C5F12300CFD3BF /* ConvertJSONToWord.swift */,
+				FF821A2428C5F14A00CFD3BF /* DecodeJSONToStruct.swift */,
 				AC15E5E628C4AC1F008D1858 /* ScreenSize.swift */,
 				ACB464F128C888720095D8BD /* TextFieldAlert.swift */,
 				BD30437F28CC7A0A00BB61B6 /* ModalTextInput.swift */,
@@ -222,8 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				FF821A0928C5F01800CFD3BF /* Player.swift */,
-				FF821A2228C5F12300CFD3BF /* ConvertJSONToWord.swift */,
-				FF821A2428C5F14A00CFD3BF /* DecodeJSONToStruct.swift */,
 				BDF40CAB28C7419A00724E7B /* WordViewModel.swift */,
 			);
 			path = WordFunc;
@@ -259,7 +257,6 @@
 			isa = PBXGroup;
 			children = (
 				FF821A1428C5F06A00CFD3BF /* CollectionView.swift */,
-				FF821A1528C5F06A00CFD3BF /* EditWordView.swift */,
 			);
 			path = UserViews;
 			sourceTree = "<group>";
@@ -396,7 +393,6 @@
 				FF821A2528C5F14A00CFD3BF /* DecodeJSONToStruct.swift in Sources */,
 				AC15E5D228C485CF008D1858 /* BrotherDictionaryApp.swift in Sources */,
 				ACB464F228C888720095D8BD /* TextFieldAlert.swift in Sources */,
-				FF821A1728C5F06A00CFD3BF /* EditWordView.swift in Sources */,
 				FF821A2028C5F08100CFD3BF /* SignInView.swift in Sources */,
 				FF821A0F28C5F02A00CFD3BF /* ContentView.swift in Sources */,
 				FF821A2728C5F1AA00CFD3BF /* WordJSON.swift in Sources */,

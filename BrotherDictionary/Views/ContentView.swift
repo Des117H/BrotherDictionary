@@ -10,7 +10,6 @@ import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
-    
     @EnvironmentObject var viewModel: AuthModel
     
     var body: some View {

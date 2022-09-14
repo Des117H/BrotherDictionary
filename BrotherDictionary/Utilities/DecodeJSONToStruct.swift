@@ -16,11 +16,5 @@ func decoceJsonFileToStruct(wordSearch: String) -> WordJSON {
             }
         }
     }
-    
-    return [WordElement(word: "",
-                        phonetics: [Phonetic(audio: "", text: "")],
-                        meanings: [Meaning(partOfSpeech: "",
-                                           definitions: [Definition(definition: "")])
-                        ])
-    ]
+	return [WordElement()]
 }

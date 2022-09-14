@@ -11,7 +11,7 @@ struct User {
     var email : String
     var lightmode : Bool
     
-    init(){
+    init() {
         email = ""
         lightmode = false
     }

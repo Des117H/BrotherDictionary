@@ -13,6 +13,7 @@ struct WordDetailView: View {
     @StateObject var wordViewModel = WordViewModel()
     @State var result = Word()
     @State private var searchText = ""
+	@EnvironmentObject var viewModel: AuthModel
         
     var body: some View {
         VStack {
@@ -59,10 +60,13 @@ struct WordDetailView: View {
             }
             Spacer()
         }
+		.onAppear(perform: {
+			viewModel.getOne()
+		})
         .onChange(of: showEdit) { _ in
 			wordViewModel.getDetailOneWord(searchWord: result.word)
 		}
-        .textFieldAlert(isShowing: $showEdit, text: $newDef, wordChosen: result.word)
+		.textFieldAlert(isShowing: $showEdit, text: $newDef, wordChosen: result.word, isDark: viewModel.singleUser.lightmode)
         .navigationBarTitle(Text(""), displayMode: .inline)
 	}
 }

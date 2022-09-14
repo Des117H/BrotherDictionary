@@ -17,6 +17,12 @@ struct WordElement: Codable {
     let word: String
     let phonetics: [Phonetic]
     let meanings: [Meaning]
+	
+	init() {
+		self.word = ""
+		self.phonetics = [Phonetic()]
+		self.meanings = [Meaning()]
+	}
     
     init(word: String, phonetics: [Phonetic], meanings: [Meaning]) {
         self.word = word
@@ -28,6 +34,10 @@ struct WordElement: Codable {
 struct Meaning: Codable {
     let partOfSpeech: String
     let definitions: [Definition]
+	init() {
+		self.partOfSpeech = ""
+		self.definitions = [Definition()]
+	}
     init(partOfSpeech: String, definitions: [Definition]) {
         self.partOfSpeech = partOfSpeech
         self.definitions = definitions
@@ -37,6 +47,9 @@ struct Meaning: Codable {
 // MARK: - Definition
 struct Definition: Codable {
     let definition: String
+	init () {
+		self.definition = ""
+	}
     init(definition: String) {
         self.definition = definition
     }
@@ -46,6 +59,11 @@ struct Definition: Codable {
 struct Phonetic: Codable {
     let audio: String
     let text: String?
+	
+	init() {
+		self.audio = ""
+		self.text = ""
+	}
     
     init(audio: String, text: String) {
         self.audio = audio

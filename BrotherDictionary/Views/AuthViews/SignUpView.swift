@@ -27,7 +27,6 @@ struct SignUpView: View {
 				}
 				
 				viewModel.SignUp(email: email, password: password)
-				
 			}, label: {
 				Text("Sign Up")
 					.navigationTitle("Sign Up")
@@ -38,7 +37,11 @@ struct SignUpView: View {
 			
 			Spacer()
 		}
-    }}
+		.alert("User already exist!!!", isPresented: $viewModel.isTryIn) {
+			Button("OK", role: .cancel) { }
+		}
+    }
+}
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
